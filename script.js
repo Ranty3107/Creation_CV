@@ -254,9 +254,31 @@ return `<div style="width:210mm;padding:30px;background:white;box-sizing:border-
 }
 
 function buildDarkSidebarTemplate(d){
-const primaryColor='#1abc9c';
-const photoHTML=photoBase64?`<img src="${photoBase64}" alt="Photo du candidat" style="width:100px;height:100px;object-fit:cover;border-radius:50%;border:3px solid #1abc9c;margin:0 auto 15px;display:block;">`:'';
-return `<table style="width:210mm;min-width:210mm;border-collapse:collapse;table-layout:fixed;background:white;"><tr><td style="width:70mm;background:#2c3e50;color:white;vertical-align:top;padding:25px 20px;">${photoHTML}<h2 style="font-size:16px;font-weight:bold;text-align:center;margin-bottom:15px;color:#fff;">${d.name}</h2><div style="font-size:11px;margin-bottom:20px;color:#ecf0f1;">${d.email?`<div style="margin-bottom:6px;">✉ ${d.email}</div>`:''}${d.phone?`<div style="margin-bottom:6px;">📞 ${d.phone}</div>`:''}${d.birthdate?`<div style="margin-bottom:6px;">📅 ${d.birthdate}</div>`:''}${d.address?`<div style="margin-bottom:6px;">📍 ${d.address}</div>`:''}</div>${buildSkillsSection(d.skillsRaw,primaryColor)}${buildLanguagesSection(primaryColor)}</td><td style="width:140mm;vertical-align:top;padding:30px;background:white;">${buildProfileSection(d.summary,'#2c3e50')}${buildFormationsSection('#2c3e50')}${buildExperiencesSection('#2c3e50')}</td></tr></table>`;
+    const primaryColor='#1abc9c';
+    const photoHTML=photoBase64?`<img src="${photoBase64}" alt="Photo du candidat" style="width:100px;height:100px;object-fit:cover;border-radius:50%;border:3px solid #1abc9c;margin:0 auto 15px;display:block;">`:'';
+    
+    // On passe '#ecf0f1' comme couleur de texte pour qu'il soit bien visible sur le fond sombre (#2c3e50)
+    return `<table style="width:210mm;min-width:210mm;border-collapse:collapse;table-layout:fixed;background:white;">
+    <tr>
+        <td style="width:70mm;background:#2c3e50;color:white;vertical-align:top;padding:25px 20px;">
+            ${photoHTML}
+            <h2 style="font-size:16px;font-weight:bold;text-align:center;margin-bottom:15px;color:#fff;">${d.name}</h2>
+            <div style="font-size:11px;margin-bottom:20px;color:#ecf0f1;">
+                ${d.email?`<div style="margin-bottom:6px;">✉ ${d.email}</div>`:''}
+                ${d.phone?`<div style="margin-bottom:6px;">📞 ${d.phone}</div>`:''}
+                ${d.birthdate?`<div style="margin-bottom:6px;">📅 ${d.birthdate}</div>`:''}
+                ${d.address?`<div style="margin-bottom:6px;">📍 ${d.address}</div>`:''}
+            </div>
+            ${buildSkillsSection(d.skillsRaw, primaryColor, '#ecf0f1')}
+            ${buildLanguagesSection(primaryColor, '#ecf0f1')}
+        </td>
+        <td style="width:140mm;vertical-align:top;padding:30px;background:white;">
+            ${buildProfileSection(d.summary,'#2c3e50')}
+            ${buildFormationsSection('#2c3e50')}
+            ${buildExperiencesSection('#2c3e50')}
+        </td>
+    </tr>
+    </table>`;
 }
 
 function buildProfileSection(summary,color){
@@ -289,25 +311,33 @@ html+=`<div style="margin-bottom:14px;"><table style="width:100%;border-collapse
 return html+'</div>';
 }
 
-function buildSkillsSection(skillsRaw,color){
-if(!skillsRaw)return '';
-const skillsArray=skillsRaw.split(',').map(skill=>skill.trim()).filter(skill=>skill);
-if(skillsArray.length===0)return '';
-let html=`<div style="margin-bottom:20px;"><h3 style="font-size:12px;color:${color};text-transform:uppercase;border-bottom:1px solid #d1d5db;padding-bottom:3px;margin-bottom:8px;font-weight:bold;">Compétences</h3>`;
-skillsArray.forEach(skill=>{
-html+=`<p style="margin:3px 0;font-size:11px;color:#333;">• ${escapeHTML(skill)}</p>`;
-});
-return html+'</div>';
+function buildSkillsSection(skillsRaw, color, textColor = '#333'){
+    if(!skillsRaw) return '';
+    const skillsArray = skillsRaw.split(',').map(skill => skill.trim()).filter(skill => skill);
+    if(skillsArray.length === 0) return '';
+    
+    let html = `<div style="margin-bottom:20px;">
+        <h3 style="font-size:12px;color:${color};text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.2);padding-bottom:3px;margin-bottom:8px;font-weight:bold;">Compétences</h3>`;
+    
+    skillsArray.forEach(skill => {
+        html += `<p style="margin:3px 0;font-size:11px;color:${textColor};">• ${escapeHTML(skill)}</p>`;
+    });
+    
+    return html + '</div>';
 }
 
-function buildLanguagesSection(color){
-const validLanguages=languages.filter(lang=>lang.language.trim());
-if(validLanguages.length===0)return '';
-let html=`<div style="margin-bottom:20px;"><h3 style="font-size:12px;color:${color};text-transform:uppercase;border-bottom:1px solid #d1d5db;padding-bottom:3px;margin-bottom:8px;font-weight:bold;">Langues</h3>`;
-validLanguages.forEach(lang=>{
-html+=`<div style="font-size:11px;margin-bottom:4px;color:#333;">• <strong>${escapeHTML(lang.language)}</strong>${lang.level.trim()?`: ${escapeHTML(lang.level)}`:''}</div>`;
-});
-return html+'</div>';
+function buildLanguagesSection(color, textColor = '#333'){
+    const validLanguages = languages.filter(lang => lang.language.trim());
+    if(validLanguages.length === 0) return '';
+    
+    let html = `<div style="margin-bottom:20px;">
+        <h3 style="font-size:12px;color:${color};text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.2);padding-bottom:3px;margin-bottom:8px;font-weight:bold;">Langues</h3>`;
+    
+    validLanguages.forEach(lang => {
+        html += `<div style="font-size:11px;margin-bottom:4px;color:${textColor};">• <strong style="color:${textColor};">${escapeHTML(lang.language)}</strong>${lang.level.trim() ? `: ${escapeHTML(lang.level)}` : ''}</div>`;
+    });
+    
+    return html + '</div>';
 }
 
 function formatHeaderName(name){
