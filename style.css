@@ -1,53 +1,131 @@
-/* Dimensions strictes et fixes d'une feuille A4 */
-.cv-a4-page {
+#cvPreview {
     width: 210mm !important;
-    min-width: 210mm !important;
-    max-width: 210mm !important;
     height: 297mm !important;
+    min-width: 210mm !important;
     min-height: 297mm !important;
+    max-width: 210mm !important;
     max-height: 297mm !important;
-    box-sizing: border-box;
-    overflow: hidden;
-    background: white;
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 0 auto;
+
+    margin: 0 auto !important;
+    padding: 0 !important;
+
+    background: #ffffff !important;
+
+    box-sizing: border-box !important;
+
+    position: relative !important;
+    overflow: hidden !important;
+
+    display: block !important;
+    flex: none !important;
+
+    transform: none !important;
 }
 
-/* Scrollbar professionnelle personnalisée pour le panneau latéral */
-.custom-scrollbar::-webkit-scrollbar {
-    width: 6px;
+/* Tous les éléments internes respectent leur boîte */
+#cvPreview,
+#cvPreview *,
+#cvPreview *::before,
+#cvPreview *::after {
+    box-sizing: border-box;
 }
-.custom-scrollbar::-webkit-scrollbar-track {
-    background: #f1f5f9;
-    border-radius: 8px;
+
+/* Images */
+#cvPreview img {
+    max-width: 100%;
 }
-.custom-scrollbar::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 8px;
+
+/* Éviter les coupures */
+.keep-together {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
 }
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
+
+/* ==========================================
+   ZONE UTILISÉE UNIQUEMENT POUR L'EXPORT PDF
+========================================== */
+
+.pdf-export-container {
+    width: 210mm !important;
+    height: 297mm !important;
+    min-width: 210mm !important;
+    min-height: 297mm !important;
+    max-width: 210mm !important;
+    max-height: 297mm !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    background: #ffffff !important;
+
+    position: absolute !important;
+    left: -10000px !important;
+    top: 0 !important;
+
+    overflow: hidden !important;
+
+    display: block !important;
+    transform: none !important;
 }
+
+/* ==========================================
+   IMPRESSION
+========================================== */
 
 @media print {
+    /* Paramètres de la page PDF (Format A4, sans marges par défaut) */
     @page {
         size: A4 portrait;
         margin: 0;
     }
-    body {
-        background-color: white;
-        print-color-adjust: exact;
-        -webkit-print-color-adjust: exact;
-        margin: 0;
-    }
-    .no-print {
+
+    /* Masquer l'interface utilisateur (en-tête, barre latérale d'édition, modal) */
+    header, aside, #mvolaModal {
         display: none !important;
     }
-    .cv-a4-page {
-        box-shadow: none !important;
+
+    /* Réinitialiser la grille principale pour laisser toute la place au CV */
+    main {
+        display: block !important;
         margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Enlever les espacements de la section d'aperçu */
+    section {
+        padding: 0 !important;
+        margin: 0 !important;
+        display: block !important;
+    }
+
+    /* Forcer l'impression stricte des couleurs de fond et bordures */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+
+    /* Centrage strict du CV sur la page A4 */
+    html, body {
         width: 210mm !important;
         height: 297mm !important;
-        border-radius: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+    }
+
+    #cvPreview {
+        width: 210mm !important;
+        height: 297mm !important;
+        box-shadow: none !important;
+        border: none !important;
+        margin: 0 !important;
+        position: relative !important;
     }
 }
+
+    #cvPreview,
+    #cvPreview * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
