@@ -4,151 +4,381 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>Générateur de CV Pro - Format A4</title>
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Bibliothèques -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="bg-slate-50 text-slate-800 min-h-screen py-8 px-4 font-sans antialiased">
+
 <header class="max-w-7xl mx-auto mb-8 text-center lg:text-left">
-<h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Générateur de CV Pro</h1>
-<p class="text-sm text-slate-500 mt-1">Créez et personnalisez votre CV professionnel.</p>
+    <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">
+        Générateur de CV Pro
+    </h1>
+    <p class="text-sm text-slate-500 mt-1">
+        Créez et personnalisez votre CV professionnel.
+    </p>
 </header>
+
 <main class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+
 <aside class="lg:col-span-4 xl:col-span-3 bg-slate-50/50 p-6 rounded-2xl shadow-lg border border-slate-200 space-y-6 no-print overflow-y-auto max-h-[85vh] sticky top-8 custom-scrollbar">
+
 <h2 class="text-xl font-extrabold text-slate-800 flex items-center gap-2">
-<svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+<svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+</svg>
 Éditer le CV
 </h2>
+
 <div class="mb-6">
-<label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Choisissez un modèle</label>
+
+<label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
+Choisissez un modèle
+</label>
+
 <div class="grid grid-cols-3 gap-2">
-<button type="button" id="btn-tpl-modern" onclick="selectTemplate('modern')" class="template-card p-2 border-2 rounded-lg text-center cursor-pointer transition ring-4 ring-indigo-600 border-indigo-600 bg-indigo-50 shadow-lg">
-<div class="h-10 bg-slate-200 rounded mb-1 flex items-center justify-center text-[10px] font-bold text-slate-600">Moderne</div>
+
+<button type="button"
+id="btn-tpl-modern"
+onclick="selectTemplate('modern')"
+class="template-card p-2 border-2 rounded-lg text-center cursor-pointer transition ring-4 ring-indigo-600 border-indigo-600 bg-indigo-50 shadow-lg">
+<div class="h-10 bg-slate-200 rounded mb-1 flex items-center justify-center text-[10px] font-bold text-slate-600">
+Moderne
+</div>
 <span class="text-[10px] font-semibold text-slate-700">Moderne</span>
 </button>
-<button type="button" id="btn-tpl-banner" onclick="selectTemplate('banner')" class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
-<div class="h-10 bg-teal-800 rounded mb-1 flex items-center justify-center text-[10px] font-bold text-white">Bandeau</div>
+
+<button type="button"
+id="btn-tpl-banner"
+onclick="selectTemplate('banner')"
+class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
+<div class="h-10 bg-teal-800 rounded mb-1 flex items-center justify-center text-[10px] font-bold text-white">
+Bandeau
+</div>
 <span class="text-[10px] font-semibold text-slate-700">Bandeau</span>
 </button>
-<button type="button" id="btn-tpl-minimalist" onclick="selectTemplate('minimalist')" class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
-<div class="h-10 bg-amber-100 rounded mb-1 flex items-center justify-center text-[10px] font-bold text-amber-800">Épuré</div>
+
+<button type="button"
+id="btn-tpl-minimalist"
+onclick="selectTemplate('minimalist')"
+class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
+<div class="h-10 bg-amber-100 rounded mb-1 flex items-center justify-center text-[10px] font-bold text-amber-800">
+Épuré
+</div>
 <span class="text-[10px] font-semibold text-slate-700">Épuré</span>
 </button>
-<button type="button" id="btn-tpl-headerCenter" onclick="selectTemplate('headerCenter')" class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
-<div class="h-10 bg-slate-700 rounded mb-1 flex items-center justify-center text-[10px] font-bold text-white">Centré</div>
+
+<button type="button"
+id="btn-tpl-headerCenter"
+onclick="selectTemplate('headerCenter')"
+class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
+<div class="h-10 bg-slate-700 rounded mb-1 flex items-center justify-center text-[10px] font-bold text-white">
+Centré
+</div>
 <span class="text-[10px] font-semibold text-slate-700">Centré</span>
 </button>
-<button type="button" id="btn-tpl-darkSidebar" onclick="selectTemplate('darkSidebar')" class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
-<div class="h-10 bg-slate-900 rounded mb-1 flex items-center justify-center text-[10px] font-bold text-teal-400">Sombre</div>
+
+<button type="button"
+id="btn-tpl-darkSidebar"
+onclick="selectTemplate('darkSidebar')"
+class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
+<div class="h-10 bg-slate-900 rounded mb-1 flex items-center justify-center text-[10px] font-bold text-teal-400">
+Sombre
+</div>
 <span class="text-[10px] font-semibold text-slate-700">Sombre</span>
 </button>
+
+<!-- NOUVEAU MODELE -->
+<button type="button"
+id="btn-tpl-modernBlue"
+onclick="selectTemplate('modernBlue')"
+class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
+
+<div class="h-10 rounded mb-1 flex overflow-hidden">
+    <span class="w-2/5 bg-[#263F5B]"></span>
+    <span class="w-3/5 bg-white"></span>
 </div>
-</div>
-<div class="section-card">
-<h3 class="section-title">
-<svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-Informations
-</h3>
-<div>
-<label class="block text-xs font-semibold text-slate-600 mb-1">Nom complet</label>
-<input type="text" id="inputName" class="input-field" placeholder="Ex : Jean DUPONT">
-</div>
-<div>
-<label class="block text-xs font-semibold text-slate-600 mb-1">Photo d'identité</label>
-<label class="flex items-center justify-center w-full px-4 py-2 border-2 border-dashed border-slate-300 rounded-lg cursor-pointer hover:bg-slate-50 hover:border-indigo-400 transition-colors">
-<span class="text-sm text-slate-500 flex items-center gap-2">
-<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
-Cliquer pour choisir une photo
+
+<span class="text-[10px] font-semibold text-slate-700">
+Moderne Bleu
 </span>
-<input type="file" id="inputPhotoFile" accept="image/*" class="hidden">
-</label>
-</div>
-<div>
-<label class="block text-xs font-semibold text-slate-600 mb-1">Email</label>
-<input type="email" id="inputEmail" class="input-field" placeholder="Ex : email@domaine.com">
-</div>
-<div>
-<label class="block text-xs font-semibold text-slate-600 mb-1">Téléphone</label>
-<input type="text" id="inputPhone" class="input-field" placeholder="Ex : +261 34 00 000 00">
-</div>
-<div>
-<label class="block text-xs font-semibold text-slate-600 mb-1">Adresse</label>
-<textarea id="inputAddress" rows="2" class="input-field resize-none" placeholder="Votre adresse complète"></textarea>
-</div>
-<div>
-<label class="block text-xs font-semibold text-slate-600 mb-1">Date de naissance</label>
-<input type="text" id="inputBirthdate" class="input-field" placeholder="Ex : 01 janvier 1990">
-</div>
-</div>
-<div class="section-card">
-<h3 class="section-title">Profil professionnel</h3>
-<textarea id="inputSummary" rows="4" class="input-field resize-y min-h-[100px]" placeholder="Décrivez brièvement votre parcours, vos compétences et vos objectifs..."></textarea>
-</div>
-<div class="section-card">
-<div class="flex justify-between items-center">
-<h3 class="section-title mb-0 border-none">Formations</h3>
-<button type="button" onclick="addFormationField()" class="add-btn cursor-pointer">+ Ajouter</button>
-</div>
-<div id="formationsContainer" class="space-y-3 mt-3"></div>
-</div>
-<div class="section-card">
-<div class="flex justify-between items-center">
-<h3 class="section-title mb-0 border-none">Expériences</h3>
-<button type="button" onclick="addExperienceField()" class="add-btn cursor-pointer">+ Ajouter</button>
-</div>
-<div id="experiencesContainer" class="space-y-3 mt-3"></div>
-</div>
-<div class="section-card">
-<h3 class="section-title">Compétences</h3>
-<input type="text" id="inputSkills" class="input-field" placeholder="Ex : Word, Excel, Gestion, Communication">
-</div>
-<div class="section-card">
-<div class="flex justify-between items-center">
-<h3 class="section-title mb-0 border-none">Langues</h3>
-<button type="button" onclick="addLanguageField()" class="add-btn cursor-pointer">+ Ajouter</button>
-</div>
-<div id="languagesContainer" class="space-y-3 mt-3"></div>
-</div>
-<div class="pt-2 space-y-3">
-<!-- MODIFICATION ICI : Appel de openMvolaModal() au lieu de downloadPDF() direct -->
-<button id="downloadPdfBtn" type="button" onclick="openMvolaModal()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer text-sm">
-<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-Générer le CV PDF
+
 </button>
 
 </div>
-</aside>
-<section class="lg:col-span-8 xl:col-span-9 flex justify-center items-start overflow-x-auto pb-10">
-<div id="cvPreview" class="cv-a4-page bg-white shadow-2xl ring-1 ring-slate-900/5"></div>
-</section>
-</main>
-<div id="mvolaModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
-<div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100">
-<div class="text-center">
-<div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">📱</div>
-<h3 id="mvolaModalTitle" class="text-xl font-extrabold text-slate-900 mb-2">CV généré avec succès !</h3>
-<p id="mvolaModalText" class="text-xs text-slate-600 mb-6 leading-relaxed">Votre CV a été Crée avec succès.</p>
 </div>
-<div class="bg-amber-50 p-4 rounded-xl border border-amber-200 mb-6 space-y-2 text-xs text-slate-800">
-<p class="font-bold text-amber-900">💡 Si vous voulez faire un don MVola :</p>
-<ol class="list-decimal list-inside space-y-1 text-slate-700">
-<li>Effectuez le transfert MVola au : <strong class="text-slate-900 font-mono">034.97.981.95</strong></li>
-<li>Raison : <STRONG>CV</STRONG></li>
+
+<div class="section-card">
+
+<h3 class="section-title">
+<svg class="w-5 h-5 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+</svg>
+Informations
+</h3>
+
+<div>
+<label class="block text-xs font-semibold text-slate-600 mb-1">
+Nom complet
+</label>
+<input type="text" id="inputName" class="input-field" placeholder="Ex : Jean DUPONT">
 </div>
-<div class="flex justify-center mt-6 mb-4">
-<button id="modalDownloadPdfBtn" type="button" onclick="downloadPDF()" class="bg-[#6B5B52] hover:bg-[#52453e] text-white font-semibold py-3 px-6 rounded-xl shadow-md transition-all duration-300 flex items-center gap-2 cursor-pointer">
-<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
-Télécharger mon CV en PDF
+
+<div>
+<label class="block text-xs font-semibold text-slate-600 mb-1">
+Photo d'identité
+</label>
+
+<label class="flex items-center justify-center w-full px-4 py-2 border-2 border-dashed border-slate-300 rounded-lg cursor-pointer hover:bg-slate-50 hover:border-indigo-400 transition-colors">
+
+<span class="text-sm text-slate-500 flex items-center gap-2">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
+</svg>
+Cliquer pour choisir une photo
+</span>
+
+<input type="file" id="inputPhotoFile" accept="image/*" class="hidden">
+
+</label>
+</div>
+
+<div>
+<label class="block text-xs font-semibold text-slate-600 mb-1">
+Email
+</label>
+<input type="email" id="inputEmail" class="input-field" placeholder="Ex : email@domaine.com">
+</div>
+
+<div>
+<label class="block text-xs font-semibold text-slate-600 mb-1">
+Téléphone
+</label>
+<input type="text" id="inputPhone" class="input-field" placeholder="Ex : +261 34 00 000 00">
+</div>
+
+<div>
+<label class="block text-xs font-semibold text-slate-600 mb-1">
+Adresse
+</label>
+<textarea id="inputAddress" rows="2" class="input-field resize-none" placeholder="Votre adresse complète"></textarea>
+</div>
+
+<div>
+<label class="block text-xs font-semibold text-slate-600 mb-1">
+Date de naissance
+</label>
+<input type="text" id="inputBirthdate" class="input-field" placeholder="Ex : 01 janvier 1990">
+</div>
+
+</div>
+
+<div class="section-card">
+
+<h3 class="section-title">
+Profil professionnel
+</h3>
+
+<textarea id="inputSummary"
+rows="4"
+class="input-field resize-y min-h-[100px]"
+placeholder="Décrivez brièvement votre parcours, vos compétences et vos objectifs..."></textarea>
+
+</div>
+
+<div class="section-card">
+
+<div class="flex justify-between items-center">
+
+<h3 class="section-title mb-0 border-none">
+Formations
+</h3>
+
+<button type="button"
+onclick="addFormationField()"
+class="add-btn cursor-pointer">
++ Ajouter
 </button>
+
 </div>
-<button type="button" onclick="closeMvolaModal()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-3 px-4 rounded-xl transition-all text-xs shadow-md cursor-pointer">J'ai compris / Fermer</button>
+
+<div id="formationsContainer" class="space-y-3 mt-3"></div>
+
+</div>
+
+<div class="section-card">
+
+<div class="flex justify-between items-center">
+
+<h3 class="section-title mb-0 border-none">
+Expériences
+</h3>
+
+<button type="button"
+onclick="addExperienceField()"
+class="add-btn cursor-pointer">
++ Ajouter
+</button>
+
+</div>
+
+<div id="experiencesContainer" class="space-y-3 mt-3"></div>
+
+</div>
+
+<div class="section-card">
+
+<h3 class="section-title">
+Compétences
+</h3>
+
+<input type="text"
+id="inputSkills"
+class="input-field"
+placeholder="Ex : Word, Excel, Gestion, Communication">
+
+</div>
+
+<div class="section-card">
+
+<div class="flex justify-between items-center">
+
+<h3 class="section-title mb-0 border-none">
+Langues
+</h3>
+
+<button type="button"
+onclick="addLanguageField()"
+class="add-btn cursor-pointer">
++ Ajouter
+</button>
+
+</div>
+
+<div id="languagesContainer" class="space-y-3 mt-3"></div>
+
+</div>
+
+<div class="pt-2 space-y-3">
+
+<button id="downloadPdfBtn"
+type="button"
+onclick="openMvolaModal()"
+class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer text-sm">
+
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+</svg>
+
+Générer le CV PDF
+
+</button>
+
+</div>
+
+</aside>
+
+<section class="lg:col-span-8 xl:col-span-9 flex justify-center items-start overflow-x-auto pb-10">
+
+<div id="cvPreview"
+class="cv-a4-page bg-white shadow-2xl ring-1 ring-slate-900/5">
+</div>
+
+</section>
+
+</main>
+
+<div id="mvolaModal"
+class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+
+<div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100">
+
+<div class="text-center">
+
+<div class="w-14 h-14 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+📱
+</div>
+
+<h3 id="mvolaModalTitle"
+class="text-xl font-extrabold text-slate-900 mb-2">
+CV généré avec succès !
+</h3>
+
+<p id="mvolaModalText"
+class="text-xs text-slate-600 mb-6 leading-relaxed">
+Votre CV a été créé avec succès.
+</p>
+
+</div>
+
+<div class="bg-amber-50 p-4 rounded-xl border border-amber-200 mb-6 space-y-2 text-xs text-slate-800">
+
+<p class="font-bold text-amber-900">
+💡 Si vous voulez faire un don MVola :
+</p>
+
+<ol class="list-decimal list-inside space-y-1 text-slate-700">
+
+<li>
+Effectuez le transfert MVola au :
+<strong class="text-slate-900 font-mono">
+034.97.981.95
+</strong>
+</li>
+
+<li>
+Raison :
+<strong>CV</strong>
+</li>
+
+</ol>
+
+</div>
+
+<div class="flex justify-center mt-6 mb-4">
+
+<button id="modalDownloadPdfBtn"
+type="button"
+onclick="downloadPDF()"
+class="bg-[#6B5B52] hover:bg-[#52453e] text-white font-semibold py-3 px-6 rounded-xl shadow-md transition-all duration-300 flex items-center gap-2 cursor-pointer">
+
+<svg xmlns="http://www.w3.org/2000/svg"
+class="h-5 w-5"
+fill="none"
+viewBox="0 0 24 24"
+stroke="currentColor">
+
+<path stroke-linecap="round"
+stroke-linejoin="round"
+stroke-width="2"
+d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l4 4m0 0l-4-4m4 4V4"/>
+
+</svg>
+
+Télécharger mon CV en PDF
+
+</button>
+
+</div>
+
+<button type="button"
+onclick="closeMvolaModal()"
+class="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-3 px-4 rounded-xl transition-all text-xs shadow-md cursor-pointer">
+
+J'ai compris / Fermer
+
+</button>
+
 </div>
 </div>
+
 <script src="script.js"></script>
+
 </body>
 </html>

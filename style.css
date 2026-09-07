@@ -22,7 +22,6 @@
     transform: none !important;
 }
 
-/* Tous les éléments internes respectent leur boîte */
 #cvPreview,
 #cvPreview *,
 #cvPreview *::before,
@@ -30,26 +29,63 @@
     box-sizing: border-box;
 }
 
-/* Images */
 #cvPreview img {
     max-width: 100%;
 }
 
-/* Éviter les coupures */
+#cvPreview table {
+    border-collapse: collapse !important;
+}
+
+#cvPreview .cv-full-height-table {
+    width: 210mm !important;
+    min-width: 210mm !important;
+    max-width: 210mm !important;
+
+    height: 297mm !important;
+    min-height: 297mm !important;
+
+    border-collapse: collapse !important;
+    table-layout: fixed !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#cvPreview .cv-full-height-table > tbody,
+#cvPreview .cv-full-height-table > tr {
+    height: 297mm !important;
+    min-height: 297mm !important;
+}
+
+#cvPreview .cv-sidebar-full {
+    height: 297mm !important;
+    min-height: 297mm !important;
+
+    vertical-align: top !important;
+
+    overflow: hidden !important;
+}
+
+#cvPreview .cv-main-full {
+    height: 297mm !important;
+    min-height: 297mm !important;
+
+    vertical-align: top !important;
+}
+
 .keep-together {
     page-break-inside: avoid !important;
     break-inside: avoid !important;
 }
 
-/* ==========================================
-   ZONE UTILISÉE UNIQUEMENT POUR L'EXPORT PDF
-========================================== */
-
 .pdf-export-container {
     width: 210mm !important;
     height: 297mm !important;
+
     min-width: 210mm !important;
     min-height: 297mm !important;
+
     max-width: 210mm !important;
     max-height: 297mm !important;
 
@@ -59,73 +95,132 @@
     background: #ffffff !important;
 
     position: absolute !important;
+
     left: -10000px !important;
     top: 0 !important;
 
     overflow: hidden !important;
 
     display: block !important;
+
     transform: none !important;
 }
 
-/* ==========================================
-   IMPRESSION
-========================================== */
+.pdf-export-container .cv-full-height-table {
+    height: 297mm !important;
+    min-height: 297mm !important;
+}
+
+.pdf-export-container .cv-sidebar-full {
+    height: 297mm !important;
+    min-height: 297mm !important;
+}
 
 @media print {
-    /* Paramètres de la page PDF (Format A4, sans marges par défaut) */
+
     @page {
         size: A4 portrait;
         margin: 0;
     }
 
-    /* Masquer l'interface utilisateur (en-tête, barre latérale d'édition, modal) */
-    header, aside, #mvolaModal {
+    header,
+    aside,
+    #mvolaModal {
         display: none !important;
     }
 
-    /* Réinitialiser la grille principale pour laisser toute la place au CV */
     main {
         display: block !important;
+
+        width: 210mm !important;
+        height: 297mm !important;
+
         margin: 0 !important;
         padding: 0 !important;
     }
 
-    /* Enlever les espacements de la section d'aperçu */
     section {
+        width: 210mm !important;
+        height: 297mm !important;
+
         padding: 0 !important;
         margin: 0 !important;
+
         display: block !important;
     }
 
-    /* Forcer l'impression stricte des couleurs de fond et bordures */
     * {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
         color-adjust: exact !important;
     }
 
-    /* Centrage strict du CV sur la page A4 */
-    html, body {
+    html,
+    body {
         width: 210mm !important;
         height: 297mm !important;
+
         margin: 0 !important;
         padding: 0 !important;
+
         background: #ffffff !important;
     }
 
     #cvPreview {
         width: 210mm !important;
         height: 297mm !important;
+
+        min-width: 210mm !important;
+        min-height: 297mm !important;
+
+        max-width: 210mm !important;
+        max-height: 297mm !important;
+
+        margin: 0 !important;
+
+        padding: 0 !important;
+
         box-shadow: none !important;
         border: none !important;
-        margin: 0 !important;
+
         position: relative !important;
+
+        overflow: hidden !important;
     }
-}
+
+    #cvPreview .cv-full-height-table {
+        width: 210mm !important;
+        height: 297mm !important;
+
+        min-width: 210mm !important;
+        min-height: 297mm !important;
+
+        max-width: 210mm !important;
+        max-height: 297mm !important;
+
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    #cvPreview .cv-full-height-table > tbody,
+    #cvPreview .cv-full-height-table > tr {
+        height: 297mm !important;
+        min-height: 297mm !important;
+    }
+
+    #cvPreview .cv-sidebar-full {
+        height: 297mm !important;
+        min-height: 297mm !important;
+    }
+
+    #cvPreview .cv-main-full {
+        height: 297mm !important;
+        min-height: 297mm !important;
+    }
 
     #cvPreview,
     #cvPreview * {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
     }
+}
