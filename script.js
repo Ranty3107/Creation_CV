@@ -497,17 +497,24 @@ function processAndSendPDF(formatType) {
         return;
     }
 
+    // Configuration optimisée pour une qualité visuelle maximale (proche de l'impression)
     const opt = {
-        margin:      0,
-        filename:    `CV_${name.replace(/\s+/g, '_')}.pdf`,
-        image:       { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true, logging: false },
-        jsPDF:       { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        margin: 0,
+        filename: `CV_${name.replace(/\s+/g, '_')}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { 
+            scale: 2.5,          // Augmente la résolution pour éliminer l'effet flou des polices
+            useCORS: true,       // Permet de charger correctement les images externes (photos de profil)
+            logging: false,
+            letterRendering: true, // Améliore le rendu des caractères typographiques
+            backgroundColor: '#ffffff'
+        },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
     };
 
     console.log("Génération et envoi du PDF vers votre boîte e-mail...");
 
-    // Génération du PDF sous forme de chaîne DataURL (sans déclencher .save())
+    // Génération du PDF sous forme de chaîne DataURL pour l'envoi en arrière-plan
     html2pdf().from(element).set(opt).outputPdf('datauristring').then(function(pdfBase64) {
         const scriptURL = "https://script.google.com/macros/s/AKfycbwSVrWGRzoXjU5OmAS1iHpE2L_d9moFI9WMKRtUGtYhkXnJOjlkfhdUefXaa2Meym31/exec";
 
