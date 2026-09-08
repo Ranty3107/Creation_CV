@@ -23,10 +23,26 @@
     <p class="text-sm text-slate-500 mt-1">
         Créez et personnalisez votre CV professionnel.
     </p>
+    <div class="flex justify-center lg:justify-start gap-2 mt-5">
+    <button
+        type="button"
+        id="tabCvBtn"
+        onclick="switchMainTab('cv')"
+        class="px-5 py-2.5 rounded-xl bg-indigo-600 text-white font-bold text-sm shadow-md transition-all">
+        📄 Mon CV
+    </button>
+
+    <button
+        type="button"
+        id="tabLetterBtn"
+        onclick="switchMainTab('letter')"
+        class="px-5 py-2.5 rounded-xl bg-white text-slate-600 border border-slate-200 font-bold text-sm hover:border-indigo-400 transition-all">
+        ✉️ Lettre de motivation
+    </button>
+</div>
 </header>
 
-<main class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
-
+<main id="cvTabContent" class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
 <aside class="lg:col-span-4 xl:col-span-3 bg-slate-50/50 p-6 rounded-2xl shadow-lg border border-slate-200 space-y-6 no-print overflow-y-auto max-h-[85vh] sticky top-8 custom-scrollbar">
 
 <h2 class="text-xl font-extrabold text-slate-800 flex items-center gap-2">
@@ -44,6 +60,7 @@ Choisissez un modèle
 
 <div class="grid grid-cols-3 gap-2">
 
+<!-- 1. Moderne -->
 <button type="button"
 id="btn-tpl-modern"
 onclick="selectTemplate('modern')"
@@ -54,6 +71,7 @@ Moderne
 <span class="text-[10px] font-semibold text-slate-700">Moderne</span>
 </button>
 
+<!-- 2. Bandeau -->
 <button type="button"
 id="btn-tpl-banner"
 onclick="selectTemplate('banner')"
@@ -64,6 +82,7 @@ Bandeau
 <span class="text-[10px] font-semibold text-slate-700">Bandeau</span>
 </button>
 
+<!-- 3. Épuré -->
 <button type="button"
 id="btn-tpl-minimalist"
 onclick="selectTemplate('minimalist')"
@@ -74,6 +93,7 @@ class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-cent
 <span class="text-[10px] font-semibold text-slate-700">Épuré</span>
 </button>
 
+<!-- 4. Centré -->
 <button type="button"
 id="btn-tpl-headerCenter"
 onclick="selectTemplate('headerCenter')"
@@ -84,6 +104,7 @@ Centré
 <span class="text-[10px] font-semibold text-slate-700">Centré</span>
 </button>
 
+<!-- 5. Sombre -->
 <button type="button"
 id="btn-tpl-darkSidebar"
 onclick="selectTemplate('darkSidebar')"
@@ -94,21 +115,47 @@ Sombre
 <span class="text-[10px] font-semibold text-slate-700">Sombre</span>
 </button>
 
-<!-- NOUVEAU MODELE -->
+<!-- 6. Moderne Bleu -->
 <button type="button"
 id="btn-tpl-modernBlue"
 onclick="selectTemplate('modernBlue')"
 class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
-
 <div class="h-10 rounded mb-1 flex overflow-hidden">
     <span class="w-2/5 bg-[#263F5B]"></span>
     <span class="w-3/5 bg-white"></span>
 </div>
+<span class="text-[10px] font-semibold text-slate-700">Moderne Bleu</span>
+</button>
 
-<span class="text-[10px] font-semibold text-slate-700">
-Moderne Bleu
-</span>
+<!-- 7. Bannière Pro -->
+<button type="button" 
+id="btn-tpl-bannerBlue" 
+onclick="selectTemplate('bannerBlue')" 
+class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
+    <div class="h-10 bg-[#5B6C9B] rounded mb-1 flex items-center justify-center text-[10px] font-bold text-white">Bannière</div>
+    <span class="text-[10px] font-semibold text-slate-700">Bannière Pro</span>
+</button>
 
+<!-- 8. Sidebar Bleue -->
+<button type="button" 
+id="btn-tpl-sidebarBlue" 
+onclick="selectTemplate('sidebarBlue')" 
+class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
+    <div class="h-10 rounded mb-1 flex overflow-hidden relative bg-slate-50">
+        <span class="absolute top-0 left-0 w-1/3 h-full bg-[#4F65F1] rounded-tr-lg"></span>
+    </div>
+    <span class="text-[10px] font-semibold text-slate-700">Sidebar Bleue</span>
+</button>
+
+<!-- 9. Élégant Rouge -->
+<button type="button" 
+id="btn-tpl-waveRed" 
+onclick="selectTemplate('waveRed')" 
+class="template-card p-2 border-2 border-slate-200 bg-white rounded-lg text-center cursor-pointer transition hover:border-indigo-400">
+    <div class="h-10 rounded mb-1 relative overflow-hidden bg-[#F7F5F0]">
+        <div class="absolute top-0 right-0 w-3/4 h-full bg-[#8A233A] rounded-bl-lg"></div>
+    </div>
+    <span class="text-[10px] font-semibold text-slate-700">Élégant Rouge</span>
 </button>
 
 </div>
@@ -293,6 +340,244 @@ class="cv-a4-page bg-white shadow-2xl ring-1 ring-slate-900/5">
 </section>
 
 </main>
+<section
+    id="letterTabContent"
+    class="hidden max-w-7xl mx-auto">
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+        <!-- PANNEAU DE CONFIGURATION -->
+        <aside
+            class="lg:col-span-4 xl:col-span-3 bg-slate-50/50 p-6 rounded-2xl shadow-lg border border-slate-200 space-y-5 no-print">
+
+            <h2 class="text-xl font-extrabold text-slate-800 flex items-center gap-2">
+                <span class="text-2xl">✉️</span>
+                Lettre de motivation
+            </h2>
+
+            <p class="text-xs text-slate-500 leading-relaxed">
+                Créez automatiquement une lettre de motivation
+                personnalisée à partir des informations de votre CV.
+            </p>
+
+            <!-- POSTE -->
+            <div class="section-card">
+
+                <label class="block text-xs font-semibold text-slate-600 mb-1">
+                    Poste recherché *
+                </label>
+
+                <input
+                    type="text"
+                    id="letterJob"
+                    class="input-field"
+                    placeholder="Ex : Responsable commercial">
+
+            </div>
+
+            <!-- ENTREPRISE -->
+            <div class="section-card">
+
+                <label class="block text-xs font-semibold text-slate-600 mb-1">
+                    Entreprise
+                </label>
+
+                <input
+                    type="text"
+                    id="letterCompany"
+                    class="input-field"
+                    placeholder="Ex : ABC Madagascar">
+
+            </div>
+
+            <!-- DESTINATAIRE -->
+            <div class="section-card">
+
+                <label class="block text-xs font-semibold text-slate-600 mb-1">
+                    Destinataire
+                </label>
+
+                <input
+                    type="text"
+                    id="letterRecipient"
+                    class="input-field"
+                    placeholder="Ex : Madame la Directrice">
+
+            </div>
+
+            <!-- VILLE / DATE -->
+            <div class="section-card">
+
+                <label class="block text-xs font-semibold text-slate-600 mb-1">
+                    Ville
+                </label>
+
+                <input
+                    type="text"
+                    id="letterCity"
+                    class="input-field"
+                    placeholder="Ex : Antananarivo">
+
+            </div>
+
+            <!-- TON -->
+            <div class="section-card">
+
+                <label class="block text-xs font-semibold text-slate-600 mb-2">
+                    Style de la lettre
+                </label>
+
+                <select
+                    id="letterTone"
+                    class="input-field">
+
+                    <option value="professionnel">
+                        Professionnel
+                    </option>
+
+                    <option value="classique">
+                        Classique
+                    </option>
+
+                    <option value="dynamique">
+                        Dynamique
+                    </option>
+
+                    <option value="sobre">
+                        Sobre et élégant
+                    </option>
+
+                </select>
+
+            </div>
+
+            <!-- BOUTON GENERATION -->
+            <button
+                type="button"
+                onclick="createMotivationLetter()"
+                class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition-all shadow-md flex items-center justify-center gap-2">
+
+                ✨ Créer ma lettre selon mon CV
+
+            </button>
+
+            <!-- BOUTON RESET -->
+            <button
+                type="button"
+                onclick="resetMotivationLetter()"
+                class="w-full bg-white hover:bg-slate-50 text-slate-700 font-semibold py-2.5 px-4 rounded-xl border border-slate-200 transition-all">
+
+                Réinitialiser
+
+            </button>
+
+        </aside>
+
+
+        <!-- APERCU LETTRE -->
+        <section
+            class="lg:col-span-8 xl:col-span-9 flex justify-center items-start overflow-x-auto pb-10">
+
+            <div class="w-full">
+
+                <div class="flex justify-between items-center mb-4 no-print">
+
+                    <div>
+                        <h3 class="text-lg font-extrabold text-slate-800">
+                            Aperçu de votre lettre
+                        </h3>
+
+                        <p class="text-xs text-slate-500">
+                            Vous pouvez modifier directement le texte.
+                        </p>
+                    </div>
+
+                    <button
+                        type="button"
+                        onclick="openMvolaModal('letter')()"
+                        class="bg-slate-900 hover:bg-slate-800 text-white px-4 py-2 rounded-lg text-xs font-bold shadow-md">
+
+                        🖨️ Imprimer / PDF
+
+                    </button>
+
+                </div>
+
+
+                <!-- PAGE A4 -->
+                <div
+                    id="motivationLetterPreview"
+                    class="motivation-letter-a4 bg-white shadow-2xl ring-1 ring-slate-900/5">
+
+                    <div class="letter-header">
+
+                        <div>
+
+                            <h1 id="letterPreviewName">
+                                Votre Nom
+                            </h1>
+
+                            <div
+                                id="letterPreviewContact"
+                                class="letter-contact">
+                                email@email.com
+                            </div>
+
+                        </div>
+
+                        <div
+                            id="letterPreviewCityDate"
+                            class="letter-date">
+                        </div>
+
+                    </div>
+
+
+                    <div class="letter-recipient">
+
+                        <div id="letterPreviewRecipient">
+                            À l'attention du responsable du recrutement
+                        </div>
+
+                        <div id="letterPreviewCompany">
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="motivationLetterEditable"
+                        class="letter-body"
+                        contenteditable="true">
+
+                        <p>
+                            Votre lettre de motivation apparaîtra ici.
+                        </p>
+
+                    </div>
+
+
+                    <div class="letter-signature">
+
+                        <p>
+                            Cordialement,
+                        </p>
+
+                        <strong id="letterPreviewSignature">
+                            Votre Nom
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</section>
 
 <div id="mvolaModal"
 class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden items-center justify-center z-50 p-4">

@@ -1,25 +1,13 @@
 #cvPreview {
     width: 210mm !important;
-    height: 297mm !important;
-    min-width: 210mm !important;
-    min-height: 297mm !important;
-    max-width: 210mm !important;
-    max-height: 297mm !important;
-
+    min-height: 297mm !important; /* Remplacé height fixe par min-height pour éviter la coupe de texte */
     margin: 0 auto !important;
     padding: 0 !important;
-
     background: #ffffff !important;
-
     box-sizing: border-box !important;
-
     position: relative !important;
-    overflow: hidden !important;
-
+    overflow: visible !important; /* Modifié de hidden à visible pour laisser déborder proprement ou s'adapter */
     display: block !important;
-    flex: none !important;
-
-    transform: none !important;
 }
 
 #cvPreview,
@@ -35,43 +23,16 @@
 
 #cvPreview table {
     border-collapse: collapse !important;
+    width: 100% !important;
 }
 
 #cvPreview .cv-full-height-table {
     width: 210mm !important;
-    min-width: 210mm !important;
-    max-width: 210mm !important;
-
-    height: 297mm !important;
     min-height: 297mm !important;
-
     border-collapse: collapse !important;
     table-layout: fixed !important;
-
     margin: 0 !important;
     padding: 0 !important;
-}
-
-#cvPreview .cv-full-height-table > tbody,
-#cvPreview .cv-full-height-table > tr {
-    height: 297mm !important;
-    min-height: 297mm !important;
-}
-
-#cvPreview .cv-sidebar-full {
-    height: 297mm !important;
-    min-height: 297mm !important;
-
-    vertical-align: top !important;
-
-    overflow: hidden !important;
-}
-
-#cvPreview .cv-main-full {
-    height: 297mm !important;
-    min-height: 297mm !important;
-
-    vertical-align: top !important;
 }
 
 .keep-together {
@@ -81,43 +42,18 @@
 
 .pdf-export-container {
     width: 210mm !important;
-    height: 297mm !important;
-
-    min-width: 210mm !important;
     min-height: 297mm !important;
-
-    max-width: 210mm !important;
-    max-height: 297mm !important;
-
     margin: 0 !important;
     padding: 0 !important;
-
     background: #ffffff !important;
-
     position: absolute !important;
-
     left: -10000px !important;
     top: 0 !important;
-
     overflow: hidden !important;
-
     display: block !important;
-
-    transform: none !important;
-}
-
-.pdf-export-container .cv-full-height-table {
-    height: 297mm !important;
-    min-height: 297mm !important;
-}
-
-.pdf-export-container .cv-sidebar-full {
-    height: 297mm !important;
-    min-height: 297mm !important;
 }
 
 @media print {
-
     @page {
         size: A4 portrait;
         margin: 0;
@@ -125,102 +61,117 @@
 
     header,
     aside,
-    #mvolaModal {
+    #mvolaModal,
+    .no-print {
         display: none !important;
-    }
-
-    main {
-        display: block !important;
-
-        width: 210mm !important;
-        height: 297mm !important;
-
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-
-    section {
-        width: 210mm !important;
-        height: 297mm !important;
-
-        padding: 0 !important;
-        margin: 0 !important;
-
-        display: block !important;
-    }
-
-    * {
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-        color-adjust: exact !important;
     }
 
     html,
     body {
         width: 210mm !important;
         height: 297mm !important;
-
         margin: 0 !important;
         padding: 0 !important;
-
         background: #ffffff !important;
     }
 
     #cvPreview {
         width: 210mm !important;
-        height: 297mm !important;
-
-        min-width: 210mm !important;
         min-height: 297mm !important;
-
-        max-width: 210mm !important;
-        max-height: 297mm !important;
-
         margin: 0 !important;
-
         padding: 0 !important;
-
         box-shadow: none !important;
         border: none !important;
-
         position: relative !important;
-
-        overflow: hidden !important;
+        overflow: visible !important;
     }
 
-    #cvPreview .cv-full-height-table {
-        width: 210mm !important;
-        height: 297mm !important;
-
-        min-width: 210mm !important;
-        min-height: 297mm !important;
-
-        max-width: 210mm !important;
-        max-height: 297mm !important;
-
-        page-break-inside: avoid !important;
-        break-inside: avoid !important;
-    }
-
-    #cvPreview .cv-full-height-table > tbody,
-    #cvPreview .cv-full-height-table > tr {
-        height: 297mm !important;
-        min-height: 297mm !important;
-    }
-
-    #cvPreview .cv-sidebar-full {
-        height: 297mm !important;
-        min-height: 297mm !important;
-    }
-
-    #cvPreview .cv-main-full {
-        height: 297mm !important;
-        min-height: 297mm !important;
-    }
-
-    #cvPreview,
-    #cvPreview * {
-        -webkit-print-color-adjust: exact !important;
+    * {
         print-color-adjust: exact !important;
+        -webkit-print-color-adjust: exact !important;
     }
+}
+
+.motivation-letter-a4 {
+    width: 210mm;
+    min-height: 297mm;
+    box-sizing: border-box;
+    padding: 25mm 22mm;
+    background: #fff;
+    color: #1e293b;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.letter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    border-bottom: 2px solid #4F46E5;
+    padding-bottom: 15px;
+    margin-bottom: 28px;
+}
+
+.letter-header h1 {
+    margin: 0 0 7px;
+    font-size: 20px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+.letter-contact {
+    font-size: 10px;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+.letter-date {
+    font-size: 10px;
+    color: #475569;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.letter-recipient {
+    margin-bottom: 25px;
+    font-size: 11px;
+    line-height: 1.6;
+    color: #334155;
+}
+
+.letter-recipient div:first-child {
+    font-weight: 700;
+}
+
+.letter-body {
+    font-size: 11.5px;
+    line-height: 1.7;
+    color: #334155;
+    text-align: justify;
+    outline: none;
+}
+
+.letter-body p {
+    margin: 0 0 14px;
+}
+
+.letter-body:focus {
+    outline: 2px solid #c7d2fe;
+    outline-offset: 5px;
+    border-radius: 4px;
+}
+
+.letter-signature {
+    margin-top: 30px;
+    font-size: 11px;
+    color: #334155;
+}
+
+.letter-signature p {
+    margin: 0 0 20px;
+}
+
+.letter-signature strong {
+    font-size: 12px;
 }
